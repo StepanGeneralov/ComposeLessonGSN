@@ -41,8 +41,10 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.VerticalAlignmentLine
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.composelessongsn.ui.theme.ComposeLessonGSNTheme
 import org.w3c.dom.NameList
 import javax.xml.namespace.QName
@@ -53,84 +55,42 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             ComposeLessonGSNTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()
-                    .padding(top = 10.dp)) { innerPadding ->
-                    Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
-                        listitem(innerPadding, name = "Zac Efron", prof = "Actor")
-                        listitem(innerPadding, name = "Zac Efron", prof = "Actor")
-                        listitem(innerPadding, name = "Zac Efron", prof = "Actor")
-                        listitem(innerPadding, name = "Zac Efron", prof = "Actor")
-                        listitem(innerPadding, name = "Zac Efron", prof = "Actor")
-                        listitem(innerPadding, name = "Zac Efron", prof = "Actor")
-                        listitem(innerPadding, name = "Zac Efron", prof = "Actor")
-                        listitem(innerPadding, name = "Zac Efron", prof = "Actor")
-                        listitem(innerPadding, name = "Zac Efron", prof = "Actor")
-                        listitem(innerPadding, name = "Zac Efron", prof = "Actor")
-                        listitem(innerPadding, name = "Zac Efron", prof = "Actor")
-                        listitem(innerPadding, name = "Zac Efron", prof = "Actor")
-                        listitem(innerPadding, name = "Zac Efron", prof = "Actor")
-                        listitem(innerPadding, name = "Zac Efron", prof = "Actor")
-                        listitem(innerPadding, name = "Zac Efron", prof = "Actor")
-                        listitem(innerPadding, name = "Zac Efron", prof = "Actor")
-                        listitem(innerPadding, name = "Zac Efron", prof = "Actor")
-                        listitem(innerPadding, name = "Zac Efron", prof = "Actor")
-                        listitem(innerPadding, name = "Zac Efron", prof = "Actor")
-                        listitem(innerPadding, name = "Zac Efron", prof = "Actor")
-                        listitem(innerPadding, name = "Zac Efron", prof = "Actor")
-                        listitem(innerPadding, name = "Zac Efron", prof = "Actor")
-                        listitem(innerPadding, name = "Zac Efron", prof = "Actor")
-                        listitem(innerPadding, name = "Zac Efron", prof = "Actor")
-                        listitem(innerPadding, name = "Zac Efron", prof = "Actor")
-                        listitem(innerPadding, name = "Zac Efron", prof = "Actor")
-                        listitem(innerPadding, name = "Zac Efron", prof = "Actor")
-                        listitem(innerPadding, name = "Zac Efron", prof = "Actor")
-                        listitem(innerPadding, name = "Zac Efron", prof = "Actor")
-                        listitem(innerPadding, name = "Zac Efron", prof = "Actor")
+
+                   Box(modifier = Modifier
+                       .fillMaxSize(),
+                       contentAlignment = Alignment.Center){
+                       CircleItem()
+
                     }
                 }
             }
         }
     }
-}
+
 
 @Composable
-private fun listitem(padding: PaddingValues, name: String, prof: String) {
-    var counter = remember {
+private fun CircleItem() {
+    val counter = remember {
         mutableStateOf(0)
     }
-
-
-
-    Card (modifier = Modifier
-        .fillMaxWidth()
-        .padding(10.dp)
-        .clickable {
-            counter.value++
-
-
-    },
-
-        shape = RoundedCornerShape( size = 15.dp),
-        elevation = CardDefaults.cardElevation(defaultElevation = 5.dp)){
-        Box(){
-            Row(
-                verticalAlignment = Alignment.CenterVertically
-            ){
-                Image(painter = painterResource(id = R.drawable.image),
-                    contentDescription = "image",
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier.size(64.dp)
-                        .padding(5.dp)
-                        .clip(CircleShape)
-                )
-                Column(modifier = Modifier.padding(start = 16.dp)) {
-                    Text(text = counter.value.toString())
-                    Text(text = prof)
-
-                }
-            }
-        }
+    val color = remember {
+        mutableStateOf(Color.Blue)
     }
+    Box(
+        modifier = Modifier.size(100.dp)
+            .background(color = color.value, shape = CircleShape).clickable{
+              when(++counter.value){
+                  10 -> color.value= Color.Red
+                  20 -> color.value = Color.Green
+              }
+            },
+        contentAlignment = Alignment.Center){
+        Text(text = counter.value.toString(),
+            style = TextStyle(color= Color.White, fontSize = 20.sp))
+
+    }
+
+
 }
 
 
