@@ -21,6 +21,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -55,17 +58,27 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             ComposeLessonGSNTheme {
+                Scaffold (modifier = Modifier.fillMaxSize()) { innerPadding ->
+                    LazyRow (
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding( innerPadding)
+                    ){
+                        itemsIndexed(listOf("item1", "item2", "Emd", "Finish", "Scroll")
+                        ) {_, item ->
+                            Text(
+                                item,
+                                fontSize = 30.sp,
+                                modifier = Modifier.padding(horizontal = 10.dp)
+                            )
+                    }}
 
-                   Box(modifier = Modifier
-                       .fillMaxSize(),
-                       contentAlignment = Alignment.Center){
-                       CircleItem()
-
-                    }
+                }
+                }
                 }
             }
         }
-    }
+
 
 
 @Composable
