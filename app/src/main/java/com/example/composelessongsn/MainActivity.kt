@@ -1,5 +1,6 @@
 package com.example.composelessongsn
 
+import android.content.ClipData
 import android.graphics.pdf.models.ListItem
 import android.os.Bundle
 import android.util.Log
@@ -49,6 +50,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.composelessongsn.ui.theme.ComposeLessonGSNTheme
+import com.example.composelessongsn.ui.theme.Gray100
 import org.w3c.dom.NameList
 import javax.xml.namespace.QName
 
@@ -61,16 +63,21 @@ class MainActivity : ComponentActivity() {
                 Scaffold (modifier = Modifier.fillMaxSize()) { innerPadding ->
                     LazyRow (
                         modifier = Modifier
-                            .fillMaxSize()
+                            .fillMaxWidth()
                             .padding( innerPadding)
+                            .background(Gray100)
                     ){
-                        itemsIndexed(listOf("item1", "item2", "Emd", "Finish", "Scroll")
+                        itemsIndexed( listOf(
+                            ItemRowModel(R.drawable.image_1, "Даша"),
+                            ItemRowModel(R.drawable.image_2, "Кирилл"),
+                            ItemRowModel(R.drawable.image_3, "Ангелина"),
+                            ItemRowModel(R.drawable.image_4, "Степан"),
+                            ItemRowModel(R.drawable.image_5, "Ксюша"),
+                            ItemRowModel(R.drawable.image_6, "Владик")
+                        )
                         ) {_, item ->
-                            Text(
-                                item,
-                                fontSize = 30.sp,
-                                modifier = Modifier.padding(horizontal = 10.dp)
-                            )
+                            ItemRow(itemRowModel = item)
+
                     }}
 
                 }
@@ -78,33 +85,6 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
-
-
-
-@Composable
-private fun CircleItem() {
-    val counter = remember {
-        mutableStateOf(0)
-    }
-    val color = remember {
-        mutableStateOf(Color.Blue)
-    }
-    Box(
-        modifier = Modifier.size(100.dp)
-            .background(color = color.value, shape = CircleShape).clickable{
-              when(++counter.value){
-                  10 -> color.value= Color.Red
-                  20 -> color.value = Color.Green
-              }
-            },
-        contentAlignment = Alignment.Center){
-        Text(text = counter.value.toString(),
-            style = TextStyle(color= Color.White, fontSize = 20.sp))
-
-    }
-
-
-}
 
 
 
