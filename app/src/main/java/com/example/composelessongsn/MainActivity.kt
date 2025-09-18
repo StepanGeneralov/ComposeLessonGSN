@@ -61,19 +61,24 @@ class MainActivity : ComponentActivity() {
         setContent {
             ComposeLessonGSNTheme {
                 Scaffold (modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    LazyRow (
+                    LazyColumn (
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding( innerPadding)
                             .background(Gray100)
                     ){
                         itemsIndexed( listOf(
-                            ItemRowModel(R.drawable.image_1, "Даша"),
-                            ItemRowModel(R.drawable.image_2, "Кирилл"),
-                            ItemRowModel(R.drawable.image_3, "Ангелина"),
-                            ItemRowModel(R.drawable.image_4, "Степан"),
-                            ItemRowModel(R.drawable.image_5, "Ксюша"),
-                            ItemRowModel(R.drawable.image_6, "Владик")
+                            ItemRowModel(R.drawable.image_1, "Даша", "test афвыфывафывафыва"
+                                    +"test афвыавфыфаывфаыаффафа"
+                                    +"test афвыавфыфаывфаыаффафа"
+
+
+                                    ),
+                            ItemRowModel(R.drawable.image_2, "Кирилл", "test"),
+                            ItemRowModel(R.drawable.image_3, "Ангелина", "test"),
+                            ItemRowModel(R.drawable.image_4, "Степан", "test"),
+                            ItemRowModel(R.drawable.image_5, "Ксюша", "test"),
+                            ItemRowModel(R.drawable.image_6, "Владик", "test")
                         )
                         ) {_, item ->
                             ItemRow(itemRowModel = item)
